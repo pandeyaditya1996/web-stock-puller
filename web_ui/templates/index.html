@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Financial Data Retriever</title>
+  </head>
+  <body>
+    <form action="/" method="post">
+      <label for="symbol">Enter Stock Symbol:</label>
+      <input type="text" id="symbol" name="symbol" />
+      <input type="submit" value="Fetch Data" />
+    </form>
+
+    {% if data %}
+    <div>
+      <p>{{ data.current_time }}</p>
+      <p>{{ data.company_name }} ({{ data.symbol }})</p>
+      <p>
+        {{ "%.2f"|format(data.current_price) }} {{ '+' if data.value_change >= 0
+        else '-' }}{{ "%.2f"|format(data.value_change) }} ({{ '+' if
+        data.percentage_change >= 0 else '-' }}{{
+        "%.2f"|format(data.percentage_change) }}%)
+      </p>
+    </div>
+    {% endif %} {% if error %}
+    <p style="color: red">{{ error }}</p>
+    {% endif %}
+  </body>
+</html>
